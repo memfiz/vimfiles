@@ -84,6 +84,12 @@ set wildmode=list:longest
 set splitbelow
 set splitright
 
+" colorscheme
+" colorscheme darkblue
+colorscheme molokai
+" let g:molokai_original = 1
+let g:rehash256 = 1
+
 " There are certain files that we would never want to edit with Vim.
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
