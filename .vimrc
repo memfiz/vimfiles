@@ -19,6 +19,7 @@ filetype indent on
 
 " Turn syntax highlighting on.
 syntax on
+let python_highlight_all = 1
 
 " Add numbers to each line on the left-hand side.
 set number
@@ -34,6 +35,10 @@ set shiftwidth=4
 
 " Set tab width to 4 columns.
 set tabstop=4
+set ts=4
+
+" indent when moving to the next line while writing code
+set autoindent
 
 " Use space characters instead of tabs.
 set expandtab
@@ -74,6 +79,10 @@ set wildmenu
 
 " Make wildmenu behave like similar to Bash completion.
 set wildmode=list:longest
+
+" split
+set splitbelow
+set splitright
 
 " There are certain files that we would never want to edit with Vim.
 " Wildmenu will ignore files with these extensions.
@@ -121,11 +130,20 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " vi go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" commentary gcc or gc in visual
+Plug 'tpope/vim-commentary'
+
 " Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+nnoremap <silent> <Leader>f :Rg<CR>
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
+
+" sublime text cursors
+Plug 'terryma/vim-multiple-cursors'
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
@@ -139,7 +157,12 @@ call plug#end()
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
-" Mappings code goes here.
+" Better tab experience - from https://webdevetc.com/
+map <leader>tn :tabnew<cr>
+map <leader>t<leader> :tabnext<cr>
+map <leader>tm :tabmove<cr>
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr>
 
 " }}}
 
